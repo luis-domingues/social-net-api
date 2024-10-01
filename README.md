@@ -12,8 +12,11 @@ SocialNET API is a web api built in ASP.NET and Entity Framework Core, which sim
 ### Features
 
 ✅ User registration with password hashing
+
 ✅ User search by ID and username
+
 ✅ Create, read, and delete posts
+
 ✅ Delete user accounts along with their posts
 
 ### Technologies
@@ -40,7 +43,7 @@ dotnet restore
 > [!TIP]
 > Learn more about instantiating and configuring a [connection string](https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/) with EF Core
 
-4. E finalmente, create the database and apply migrations
+4. And finally, create the database and apply migrations
 
 To run the application: 
 ```bash
