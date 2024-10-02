@@ -21,6 +21,29 @@ namespace SocialNetApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SocialNetApi.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("SocialNetApi.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -64,6 +87,25 @@ namespace SocialNetApi.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("SocialNetApi.Entities.Like", b =>
+                {
+                    b.HasOne("SocialNetApi.Entities.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetApi.Entities.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SocialNetApi.Entities.Post", b =>
                 {
                     b.HasOne("SocialNetApi.Entities.User", "User")
@@ -75,8 +117,15 @@ namespace SocialNetApi.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SocialNetApi.Entities.Post", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("SocialNetApi.Entities.User", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

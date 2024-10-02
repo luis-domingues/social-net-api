@@ -61,4 +61,61 @@ public class UserController : ControllerBase
         _context.SaveChanges();
         return Ok();
     }
+
+    [HttpPut("updateUser{id}")]
+    public IActionResult UserUpdate(int id, User updateUser)
+    {
+        var existingUser = _context.Users.Find(id);
+        if (existingUser == null)
+            return NotFound();
+
+        existingUser.Username = updateUser.Username;
+        existingUser.Email = updateUser.Email;
+
+        if (!string.IsNullOrEmpty(updateUser.Password))
+            existingUser.Password = BCrypt.Net.BCrypt.HashPassword(updateUser.Password);
+
+        _context.SaveChanges();
+        return Ok(existingUser);
+    }
+
+    [HttpPost("likePost{postId}")]
+    public IActionResult LikePost(int postId, int userId)
+    {
+        var user = _context.Users.Find(userId);
+        var post = _context.Posts.Include(p => p.Likes).FirstOrDefault(p => p.Id == postId);
+
+        if (user == null || post == null)
+            return NotFound();
+
+        var existingUser = post.Likes.FirstOrDefault(l => l.UserId == userId);
+        if (existingUser != null)
+            return BadRequest();
+
+        var like = new Like
+        {
+            UserId = userId,
+            PostId = postId
+        };
+
+        _context.Likes.Add(like);
+        _context.SaveChanges();
+        return Ok();
+    }
+
+    [HttpDelete("unlikePost{postId}")]
+    public IActionResult UnlikePost(int postId, int userId)
+    {
+        var post = _context.Posts.Include(p => p.Likes).FirstOrDefault(p => p.Id == postId);
+        if (post == null)
+            return NotFound();
+        
+        var like = post.Likes.FirstOrDefault(l => l.UserId == userId);
+        if (like == null)
+            return BadRequest();
+        
+        _context.Likes.Remove(like);
+        _context.SaveChanges();
+        return Ok();
+    }
 }
