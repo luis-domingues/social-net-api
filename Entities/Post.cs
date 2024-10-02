@@ -1,4 +1,4 @@
-﻿namespace SocialNetApi.Entities;
+namespace SocialNetApi.Entities;
 
 public class Post
 {
@@ -8,4 +8,5 @@ public class Post
     public User User { get; set; }
 
     public ICollection<Like> Likes { get; set; }
+    public ICollection<Comment> Comments { get; set; }
 }
