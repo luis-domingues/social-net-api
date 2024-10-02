@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace SocialNetApi.Entities;
 
@@ -14,4 +14,7 @@ public class User
         
     [JsonIgnore]
     public ICollection<Like> Likes { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<Comment> Comments { get; set; }
 }
