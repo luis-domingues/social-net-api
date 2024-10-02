@@ -11,8 +11,8 @@ using SocialNetApi.Context;
 namespace SocialNetApi.Migrations
 {
     [DbContext(typeof(SocialNetApiContext))]
-    [Migration("20240930173214_AddUserPostsRelationship")]
-    partial class AddUserPostsRelationship
+    [Migration("20241002001103_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

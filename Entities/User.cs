@@ -1,4 +1,6 @@
-﻿namespace SocialNetApi.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace SocialNetApi.Entities;
 
 public class User
 {
@@ -6,5 +8,10 @@ public class User
     public string Username { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-    public ICollection<Post> Posts { get; set; } = new List<Post>();
+
+    [JsonIgnore]
+    public ICollection<Post> Posts { get; set; }
+        
+    [JsonIgnore]
+    public ICollection<Like> Likes { get; set; }
 }

@@ -34,7 +34,7 @@ public class PostController : ControllerBase
         return Ok(post);
     }
 
-    [HttpPost("userPosts{userId}")]
+    [HttpPost("whoWroteThePost{userId}")]
     public IActionResult GetPostByUser(int userId)
     {
         var user = _context.Users.Find(userId);
@@ -49,7 +49,7 @@ public class PostController : ControllerBase
         return Ok(posts);
     }
 
-    [HttpDelete("whoWroteThePost{postId}")]
+    [HttpDelete("deletePost{postId}")]
     public IActionResult DeletePost(int postId, int userId)
     {
         var post = _context.Posts.Find(postId);
