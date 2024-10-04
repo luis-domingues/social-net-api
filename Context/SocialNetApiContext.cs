@@ -11,6 +11,9 @@ public class SocialNetApiContext : DbContext
     public DbSet<Post> Posts { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<Follower> Followers { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<PostTag> PostTags { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,5 +40,30 @@ public class SocialNetApiContext : DbContext
             .WithMany(p => p.Comments)
             .HasForeignKey(c => c.PostId)
             .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Follower>()
+            .HasOne(f => f.FollowerUser)
+            .WithMany(u => u.Following)
+            .HasForeignKey(f => f.FollowerId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Follower>()
+            .HasOne(f => f.FollowingUser)
+            .WithMany(u => u.Followers)
+            .HasForeignKey(f => f.FollowingId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<PostTag>()
+            .HasKey(pt => new { pt.PostId, pt.TagId });
+
+        modelBuilder.Entity<PostTag>()
+            .HasOne(pt => pt.Post)
+            .WithMany(p => p.PostTags)
+            .HasForeignKey(pt => pt.PostId);
+
+        modelBuilder.Entity<PostTag>()
+            .HasOne(pt => pt.Tag)
+            .WithMany(t => t.PostTags)
+            .HasForeignKey(pt => pt.TagId);
     }
 }

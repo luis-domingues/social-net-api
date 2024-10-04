@@ -20,7 +20,7 @@ namespace SocialNetApi.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false)
                 },
-                constraints: table =>
+                constraints: table => 
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(

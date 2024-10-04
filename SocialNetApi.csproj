@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\LikeController.cs" />
+    <Compile Remove="Controllers\TagController.cs" />
   </ItemGroup>
 
 </Project>

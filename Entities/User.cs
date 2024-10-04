@@ -17,4 +17,7 @@ public class User
     
     [JsonIgnore]
     public ICollection<Comment> Comments { get; set; }
+
+    public IEnumerable<Follower> Following { get; set; }
+    public IEnumerable<Follower> Followers { get; set; }
 }
