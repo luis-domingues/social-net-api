@@ -19,6 +19,10 @@ SocialNET API is a web api built in ASP.NET and Entity Framework Core, which sim
 
 ✅ Delete user accounts along with their posts
 
+✅ Like and unlike posts
+
+✅ Add, view, and delete comments on posts
+
 ### Technologies
 
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/)

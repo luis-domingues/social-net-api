@@ -1,4 +1,4 @@
-﻿namespace SocialNetApi.Entities;
+namespace SocialNetApi.Entities;
 
 public class Comment
 {
