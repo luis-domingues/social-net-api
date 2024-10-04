@@ -23,6 +23,12 @@ SocialNET API is a web api built in ASP.NET and Entity Framework Core, which sim
 
 ✅ Add, view, and delete comments on posts
 
+✅ Allow users to follow other users and view their list of followers and following
+
+✅ Add tag functionality that associates posts
+
+✅ Implement search for posts based on keywords or tags
+
 ### Technologies
 
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/)
