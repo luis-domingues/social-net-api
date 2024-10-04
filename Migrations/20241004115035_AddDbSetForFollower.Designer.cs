@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialNetApi.Context;
 
@@ -11,9 +12,11 @@ using SocialNetApi.Context;
 namespace SocialNetApi.Migrations
 {
     [DbContext(typeof(SocialNetApiContext))]
-    partial class SocialNetApiContextModelSnapshot : ModelSnapshot
+    [Migration("20241004115035_AddDbSetForFollower")]
+    partial class AddDbSetForFollower
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,34 +121,6 @@ namespace SocialNetApi.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("SocialNetApi.Entities.PostTag", b =>
-                {
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("PostTags");
-                });
-
-            modelBuilder.Entity("SocialNetApi.Entities.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("SocialNetApi.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -236,37 +211,11 @@ namespace SocialNetApi.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SocialNetApi.Entities.PostTag", b =>
-                {
-                    b.HasOne("SocialNetApi.Entities.Post", "Post")
-                        .WithMany("PostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SocialNetApi.Entities.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("SocialNetApi.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
-
-                    b.Navigation("PostTags");
-                });
-
-            modelBuilder.Entity("SocialNetApi.Entities.Tag", b =>
-                {
-                    b.Navigation("PostTags");
                 });
 
             modelBuilder.Entity("SocialNetApi.Entities.User", b =>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialNetApi.Context;
 
@@ -11,9 +12,11 @@ using SocialNetApi.Context;
 namespace SocialNetApi.Migrations
 {
     [DbContext(typeof(SocialNetApiContext))]
-    partial class SocialNetApiContextModelSnapshot : ModelSnapshot
+    [Migration("20241004132821_AddTagEntity")]
+    partial class AddTagEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
